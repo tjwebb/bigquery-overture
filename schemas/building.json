@@ -1,0 +1,329 @@
+[
+  {
+    "name": "id",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "geometry",
+    "mode": "NULLABLE",
+    "type": "BYTES",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "bbox",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "minx",
+        "mode": "NULLABLE",
+        "type": "FLOAT",
+        "description": null,
+        "fields": []
+      },
+      {
+        "name": "maxx",
+        "mode": "NULLABLE",
+        "type": "FLOAT",
+        "description": null,
+        "fields": []
+      },
+      {
+        "name": "miny",
+        "mode": "NULLABLE",
+        "type": "FLOAT",
+        "description": null,
+        "fields": []
+      },
+      {
+        "name": "maxy",
+        "mode": "NULLABLE",
+        "type": "FLOAT",
+        "description": null,
+        "fields": []
+      }
+    ]
+  },
+  {
+    "name": "names",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "primary",
+        "mode": "NULLABLE",
+        "type": "STRING",
+        "description": null,
+        "fields": []
+      },
+      {
+        "name": "common",
+        "mode": "NULLABLE",
+        "type": "RECORD",
+        "description": null,
+        "fields": [
+          {
+            "name": "key_value",
+            "mode": "REPEATED",
+            "type": "RECORD",
+            "description": null,
+            "fields": [
+              {
+                "name": "key",
+                "mode": "REQUIRED",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "value",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "rules",
+        "mode": "NULLABLE",
+        "type": "RECORD",
+        "description": null,
+        "fields": [
+          {
+            "name": "list",
+            "mode": "REPEATED",
+            "type": "RECORD",
+            "description": null,
+            "fields": [
+              {
+                "name": "element",
+                "mode": "NULLABLE",
+                "type": "RECORD",
+                "description": null,
+                "fields": [
+                  {
+                    "name": "variant",
+                    "mode": "NULLABLE",
+                    "type": "STRING",
+                    "description": null,
+                    "fields": []
+                  },
+                  {
+                    "name": "language",
+                    "mode": "NULLABLE",
+                    "type": "STRING",
+                    "description": null,
+                    "fields": []
+                  },
+                  {
+                    "name": "value",
+                    "mode": "NULLABLE",
+                    "type": "STRING",
+                    "description": null,
+                    "fields": []
+                  },
+                  {
+                    "name": "at",
+                    "mode": "NULLABLE",
+                    "type": "RECORD",
+                    "description": null,
+                    "fields": [
+                      {
+                        "name": "list",
+                        "mode": "REPEATED",
+                        "type": "RECORD",
+                        "description": null,
+                        "fields": [
+                          {
+                            "name": "element",
+                            "mode": "NULLABLE",
+                            "type": "FLOAT",
+                            "description": null,
+                            "fields": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "side",
+                    "mode": "NULLABLE",
+                    "type": "STRING",
+                    "description": null,
+                    "fields": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "version",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "updateTime",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "sources",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "list",
+        "mode": "REPEATED",
+        "type": "RECORD",
+        "description": null,
+        "fields": [
+          {
+            "name": "element",
+            "mode": "NULLABLE",
+            "type": "RECORD",
+            "description": null,
+            "fields": [
+              {
+                "name": "property",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "dataset",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "recordId",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "confidence",
+                "mode": "NULLABLE",
+                "type": "FLOAT",
+                "description": null,
+                "fields": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "class",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "hasParts",
+    "mode": "NULLABLE",
+    "type": "BOOLEAN",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "height",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "numFloors",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "facadeColor",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "facadeMaterial",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "roofMaterial",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "roofShape",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "roofDirection",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "roofOrientation",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "roofColor",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "eaveHeight",
+    "mode": "NULLABLE",
+    "type": "FLOAT",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "level",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": null,
+    "fields": []
+  }
+]

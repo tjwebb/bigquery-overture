@@ -1,0 +1,296 @@
+[
+  {
+    "name": "id",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "geometry",
+    "mode": "NULLABLE",
+    "type": "BYTES",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "bbox",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "minx",
+        "mode": "NULLABLE",
+        "type": "FLOAT",
+        "description": null,
+        "fields": []
+      },
+      {
+        "name": "maxx",
+        "mode": "NULLABLE",
+        "type": "FLOAT",
+        "description": null,
+        "fields": []
+      },
+      {
+        "name": "miny",
+        "mode": "NULLABLE",
+        "type": "FLOAT",
+        "description": null,
+        "fields": []
+      },
+      {
+        "name": "maxy",
+        "mode": "NULLABLE",
+        "type": "FLOAT",
+        "description": null,
+        "fields": []
+      }
+    ]
+  },
+  {
+    "name": "version",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "update_time",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "sources",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "list",
+        "mode": "REPEATED",
+        "type": "RECORD",
+        "description": null,
+        "fields": [
+          {
+            "name": "element",
+            "mode": "NULLABLE",
+            "type": "RECORD",
+            "description": null,
+            "fields": [
+              {
+                "name": "property",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "dataset",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "record_id",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "confidence",
+                "mode": "NULLABLE",
+                "type": "FLOAT",
+                "description": null,
+                "fields": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "subtype",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "wikidata",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "names",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "primary",
+        "mode": "NULLABLE",
+        "type": "STRING",
+        "description": null,
+        "fields": []
+      },
+      {
+        "name": "common",
+        "mode": "NULLABLE",
+        "type": "RECORD",
+        "description": null,
+        "fields": [
+          {
+            "name": "key_value",
+            "mode": "REPEATED",
+            "type": "RECORD",
+            "description": null,
+            "fields": [
+              {
+                "name": "key",
+                "mode": "REQUIRED",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "value",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "rules",
+        "mode": "NULLABLE",
+        "type": "RECORD",
+        "description": null,
+        "fields": [
+          {
+            "name": "list",
+            "mode": "REPEATED",
+            "type": "RECORD",
+            "description": null,
+            "fields": [
+              {
+                "name": "element",
+                "mode": "NULLABLE",
+                "type": "RECORD",
+                "description": null,
+                "fields": [
+                  {
+                    "name": "variant",
+                    "mode": "NULLABLE",
+                    "type": "STRING",
+                    "description": null,
+                    "fields": []
+                  },
+                  {
+                    "name": "language",
+                    "mode": "NULLABLE",
+                    "type": "STRING",
+                    "description": null,
+                    "fields": []
+                  },
+                  {
+                    "name": "value",
+                    "mode": "NULLABLE",
+                    "type": "STRING",
+                    "description": null,
+                    "fields": []
+                  },
+                  {
+                    "name": "at",
+                    "mode": "NULLABLE",
+                    "type": "RECORD",
+                    "description": null,
+                    "fields": [
+                      {
+                        "name": "list",
+                        "mode": "REPEATED",
+                        "type": "RECORD",
+                        "description": null,
+                        "fields": [
+                          {
+                            "name": "element",
+                            "mode": "NULLABLE",
+                            "type": "FLOAT",
+                            "description": null,
+                            "fields": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "name": "side",
+                    "mode": "NULLABLE",
+                    "type": "STRING",
+                    "description": null,
+                    "fields": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "class",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "source_tags",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "key_value",
+        "mode": "REPEATED",
+        "type": "RECORD",
+        "description": null,
+        "fields": [
+          {
+            "name": "key",
+            "mode": "REQUIRED",
+            "type": "STRING",
+            "description": null,
+            "fields": []
+          },
+          {
+            "name": "value",
+            "mode": "NULLABLE",
+            "type": "STRING",
+            "description": null,
+            "fields": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "surface",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  }
+]
