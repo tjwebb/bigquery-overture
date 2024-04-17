@@ -82,6 +82,30 @@ resource "google_bigquery_table" "segment_table" {
   table_id = "segment_stage"
   schema = file("schemas/segment.json")
 }
+resource "google_bigquery_table" "infrastructure_table" {
+  depends_on = [google_bigquery_dataset.overture_dataset]
+  dataset_id = var.dataset
+  table_id = "infrastructure_stage"
+  schema = file("schemas/infrastructure.json")
+}
+resource "google_bigquery_table" "boundary_table" {
+  depends_on = [google_bigquery_dataset.overture_dataset]
+  dataset_id = var.dataset
+  table_id = "boundary_stage"
+  schema = file("schemas/boundary.json")
+}
+resource "google_bigquery_table" "division_table" {
+  depends_on = [google_bigquery_dataset.overture_dataset]
+  dataset_id = var.dataset
+  table_id = "division_stage"
+  schema = file("schemas/division.json")
+}
+resource "google_bigquery_table" "division_area_table" {
+  depends_on = [google_bigquery_dataset.overture_dataset]
+  dataset_id = var.dataset
+  table_id = "division_area_stage"
+  schema = file("schemas/division_area.json")
+}
 
 resource "google_bigquery_table" "building_mv" {
   depends_on = [google_bigquery_table.building_table]
@@ -224,6 +248,78 @@ resource "google_bigquery_table" "water_mv" {
         * except(geometry),
         st_geogFromWKB(geometry) as geometry
       from `${var.project}.${var.dataset}.water_stage`
+    EOH
+  }
+}
+resource "google_bigquery_table" "infrastructure_mv" {
+  depends_on = [google_bigquery_table.infrastructure_table]
+  dataset_id = google_bigquery_dataset.overture_dataset.dataset_id
+  table_id = "infrastructure"
+  clustering = ["geometry"]
+  deletion_protection = false
+
+  materialized_view {
+    enable_refresh = true
+    refresh_interval_ms = null
+    query = <<EOH
+      select
+        * except(geometry),
+        st_geogFromWKB(geometry) as geometry
+      from `${var.project}.${var.dataset}.infrastructure_stage`
+    EOH
+  }
+}
+resource "google_bigquery_table" "boundary_mv" {
+  depends_on = [google_bigquery_table.boundary_table]
+  dataset_id = google_bigquery_dataset.overture_dataset.dataset_id
+  table_id = "boundary"
+  clustering = ["geometry"]
+  deletion_protection = false
+
+  materialized_view {
+    enable_refresh = true
+    refresh_interval_ms = null
+    query = <<EOH
+      select
+        * except(geometry),
+        st_geogFromWKB(geometry) as geometry
+      from `${var.project}.${var.dataset}.boundary_stage`
+    EOH
+  }
+}
+resource "google_bigquery_table" "division_mv" {
+  depends_on = [google_bigquery_table.division_table]
+  dataset_id = google_bigquery_dataset.overture_dataset.dataset_id
+  table_id = "division"
+  clustering = ["geometry"]
+  deletion_protection = false
+
+  materialized_view {
+    enable_refresh = true
+    refresh_interval_ms = null
+    query = <<EOH
+      select
+        * except(geometry),
+        st_geogFromWKB(geometry) as geometry
+      from `${var.project}.${var.dataset}.division_stage`
+    EOH
+  }
+}
+resource "google_bigquery_table" "division_area_mv" {
+  depends_on = [google_bigquery_table.division_area_table]
+  dataset_id = google_bigquery_dataset.overture_dataset.dataset_id
+  table_id = "division_area"
+  clustering = ["geometry"]
+  deletion_protection = false
+
+  materialized_view {
+    enable_refresh = true
+    refresh_interval_ms = null
+    query = <<EOH
+      select
+        * except(geometry),
+        st_geogFromWKB(geometry) as geometry
+      from `${var.project}.${var.dataset}.division_area_stage`
     EOH
   }
 }
@@ -415,6 +511,106 @@ resource "google_bigquery_data_transfer_config" "water_transfer" {
   params = {
     data_path = "s3://overturemaps-us-west-2/release/${var.overture_version}/theme=base/type=water/*"
     destination_table_name_template = "water_stage"
+    write_disposition = "WRITE_TRUNCATE"
+    access_key_id = var.AWS_ACCESS_KEY_ID
+    file_format = "PARQUET"
+  }
+  sensitive_params {
+    secret_access_key = var.AWS_SECRET_ACCESS_KEY
+  }
+}
+
+resource "time_sleep" "wait_8" {
+  depends_on = [google_bigquery_data_transfer_config.water_transfer]
+  create_duration = "1s"
+}
+
+resource "google_bigquery_data_transfer_config" "infrastructure_transfer" {
+  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_8]
+
+  display_name           = "Overture Maps: base->infrastructure"
+  data_source_id         = "amazon_s3"
+  schedule               = "first day of month 00:00"
+  destination_dataset_id = var.dataset
+  service_account_name   = var.transfer_service_account
+  params = {
+    data_path = "s3://overturemaps-us-west-2/release/${var.overture_version}/theme=base/type=infrastructure/*"
+    destination_table_name_template = "infrastructure_stage"
+    write_disposition = "WRITE_TRUNCATE"
+    access_key_id = var.AWS_ACCESS_KEY_ID
+    file_format = "PARQUET"
+  }
+  sensitive_params {
+    secret_access_key = var.AWS_SECRET_ACCESS_KEY
+  }
+}
+
+resource "time_sleep" "wait_9" {
+  depends_on = [google_bigquery_data_transfer_config.infrastructure_transfer]
+  create_duration = "1s"
+}
+
+resource "google_bigquery_data_transfer_config" "boundary_transfer" {
+  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_9]
+
+  display_name           = "Overture Maps: divisions->boundary"
+  data_source_id         = "amazon_s3"
+  schedule               = "first day of month 00:00"
+  destination_dataset_id = var.dataset
+  service_account_name   = var.transfer_service_account
+  params = {
+    data_path = "s3://overturemaps-us-west-2/release/${var.overture_version}/theme=divisions/type=boundary/*"
+    destination_table_name_template = "boundary_stage"
+    write_disposition = "WRITE_TRUNCATE"
+    access_key_id = var.AWS_ACCESS_KEY_ID
+    file_format = "PARQUET"
+  }
+  sensitive_params {
+    secret_access_key = var.AWS_SECRET_ACCESS_KEY
+  }
+}
+
+resource "time_sleep" "wait_10" {
+  depends_on = [google_bigquery_data_transfer_config.boundary_transfer]
+  create_duration = "1s"
+}
+
+resource "google_bigquery_data_transfer_config" "division_transfer" {
+  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_10]
+
+  display_name           = "Overture Maps: divisions->division"
+  data_source_id         = "amazon_s3"
+  schedule               = "first day of month 00:00"
+  destination_dataset_id = var.dataset
+  service_account_name   = var.transfer_service_account
+  params = {
+    data_path = "s3://overturemaps-us-west-2/release/${var.overture_version}/theme=divisions/type=division/*"
+    destination_table_name_template = "division_stage"
+    write_disposition = "WRITE_TRUNCATE"
+    access_key_id = var.AWS_ACCESS_KEY_ID
+    file_format = "PARQUET"
+  }
+  sensitive_params {
+    secret_access_key = var.AWS_SECRET_ACCESS_KEY
+  }
+}
+
+resource "time_sleep" "wait_11" {
+  depends_on = [google_bigquery_data_transfer_config.division_transfer]
+  create_duration = "1s"
+}
+
+resource "google_bigquery_data_transfer_config" "division_area_transfer" {
+  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_11]
+
+  display_name           = "Overture Maps: divisions->division_area"
+  data_source_id         = "amazon_s3"
+  schedule               = "first day of month 00:00"
+  destination_dataset_id = var.dataset
+  service_account_name   = var.transfer_service_account
+  params = {
+    data_path = "s3://overturemaps-us-west-2/release/${var.overture_version}/theme=divisions/type=division_area/*"
+    destination_table_name_template = "division_area_stage"
     write_disposition = "WRITE_TRUNCATE"
     access_key_id = var.AWS_ACCESS_KEY_ID
     file_format = "PARQUET"

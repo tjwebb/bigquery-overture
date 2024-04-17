@@ -20,28 +20,28 @@
     "description": null,
     "fields": [
       {
-        "name": "minx",
+        "name": "xmin",
         "mode": "NULLABLE",
         "type": "FLOAT",
         "description": null,
         "fields": []
       },
       {
-        "name": "maxx",
+        "name": "xmax",
         "mode": "NULLABLE",
         "type": "FLOAT",
         "description": null,
         "fields": []
       },
       {
-        "name": "miny",
+        "name": "ymin",
         "mode": "NULLABLE",
         "type": "FLOAT",
         "description": null,
         "fields": []
       },
       {
-        "name": "maxy",
+        "name": "ymax",
         "mode": "NULLABLE",
         "type": "FLOAT",
         "description": null,

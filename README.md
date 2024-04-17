@@ -14,11 +14,6 @@ tf apply
 
 ![screenshot](bq-overture-dts.png)
 
-## Release notes / caveats
-
-- [`infrastructure` is missing from the base theme](https://github.com/OvertureMaps/data/issues/140). It just is. So there's no data for that job yet.
-- As of April '24, the "admin" theme is deprecated and will be replaced by divisions. But divisions is not yet released. So that's a thing.
-
 
 ## Manual instructions
 #### 1. Setup AWS Access

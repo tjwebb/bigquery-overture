@@ -123,6 +123,13 @@
     "fields": []
   },
   {
+    "name": "wikidata",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
     "name": "names",
     "mode": "NULLABLE",
     "type": "RECORD",
@@ -205,7 +212,7 @@
                     "fields": []
                   },
                   {
-                    "name": "at",
+                    "name": "between",
                     "mode": "NULLABLE",
                     "type": "RECORD",
                     "description": null,
@@ -243,26 +250,33 @@
     ]
   },
   {
-    "name": "level",
+    "name": "class",
     "mode": "NULLABLE",
-    "type": "INTEGER",
+    "type": "STRING",
     "description": null,
     "fields": []
   },
   {
-    "name": "connector_ids",
+    "name": "source_tags",
     "mode": "NULLABLE",
     "type": "RECORD",
     "description": null,
     "fields": [
       {
-        "name": "list",
+        "name": "key_value",
         "mode": "REPEATED",
         "type": "RECORD",
         "description": null,
         "fields": [
           {
-            "name": "element",
+            "name": "key",
+            "mode": "REQUIRED",
+            "type": "STRING",
+            "description": null,
+            "fields": []
+          },
+          {
+            "name": "value",
             "mode": "NULLABLE",
             "type": "STRING",
             "description": null,
@@ -271,12 +285,5 @@
         ]
       }
     ]
-  },
-  {
-    "name": "road",
-    "mode": "NULLABLE",
-    "type": "STRING",
-    "description": null,
-    "fields": []
   }
 ]

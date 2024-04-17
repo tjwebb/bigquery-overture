@@ -123,6 +123,20 @@
     "fields": []
   },
   {
+    "name": "wikidata",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "population",
+    "mode": "NULLABLE",
+    "type": "INTEGER",
+    "description": null,
+    "fields": []
+  },
+  {
     "name": "names",
     "mode": "NULLABLE",
     "type": "RECORD",
@@ -205,7 +219,7 @@
                     "fields": []
                   },
                   {
-                    "name": "at",
+                    "name": "between",
                     "mode": "NULLABLE",
                     "type": "RECORD",
                     "description": null,
@@ -243,14 +257,14 @@
     ]
   },
   {
-    "name": "level",
+    "name": "class",
     "mode": "NULLABLE",
-    "type": "INTEGER",
+    "type": "STRING",
     "description": null,
     "fields": []
   },
   {
-    "name": "connector_ids",
+    "name": "divisions",
     "mode": "NULLABLE",
     "type": "RECORD",
     "description": null,
@@ -264,16 +278,173 @@
           {
             "name": "element",
             "mode": "NULLABLE",
-            "type": "STRING",
+            "type": "RECORD",
             "description": null,
-            "fields": []
+            "fields": [
+              {
+                "name": "division_id",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "is_disputing",
+                "mode": "NULLABLE",
+                "type": "BOOLEAN",
+                "description": null,
+                "fields": []
+              }
+            ]
           }
         ]
       }
     ]
   },
   {
-    "name": "road",
+    "name": "country",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "region",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "hierarchies",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "list",
+        "mode": "REPEATED",
+        "type": "RECORD",
+        "description": null,
+        "fields": [
+          {
+            "name": "element",
+            "mode": "NULLABLE",
+            "type": "RECORD",
+            "description": null,
+            "fields": [
+              {
+                "name": "list",
+                "mode": "REPEATED",
+                "type": "RECORD",
+                "description": null,
+                "fields": [
+                  {
+                    "name": "element",
+                    "mode": "NULLABLE",
+                    "type": "RECORD",
+                    "description": null,
+                    "fields": [
+                      {
+                        "name": "division_id",
+                        "mode": "NULLABLE",
+                        "type": "STRING",
+                        "description": null,
+                        "fields": []
+                      },
+                      {
+                        "name": "subtype",
+                        "mode": "NULLABLE",
+                        "type": "STRING",
+                        "description": null,
+                        "fields": []
+                      },
+                      {
+                        "name": "name",
+                        "mode": "NULLABLE",
+                        "type": "STRING",
+                        "description": null,
+                        "fields": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "parent_division_id",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "perspectives",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "list",
+        "mode": "REPEATED",
+        "type": "RECORD",
+        "description": null,
+        "fields": [
+          {
+            "name": "element",
+            "mode": "NULLABLE",
+            "type": "RECORD",
+            "description": null,
+            "fields": [
+              {
+                "name": "type",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              },
+              {
+                "name": "holder",
+                "mode": "NULLABLE",
+                "type": "STRING",
+                "description": null,
+                "fields": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "norms",
+    "mode": "NULLABLE",
+    "type": "RECORD",
+    "description": null,
+    "fields": [
+      {
+        "name": "driving_side",
+        "mode": "NULLABLE",
+        "type": "STRING",
+        "description": null,
+        "fields": []
+      }
+    ]
+  },
+  {
+    "name": "capital_division_id",
+    "mode": "NULLABLE",
+    "type": "STRING",
+    "description": null,
+    "fields": []
+  },
+  {
+    "name": "division_id",
     "mode": "NULLABLE",
     "type": "STRING",
     "description": null,
