@@ -1,6 +1,6 @@
 # bigquery-overture
 
-This is a Terraform toolkit that loads [Overture Maps](https://overturemaps.org/) data into BigQuery tables.
+This is a Terraform toolkit that loads [Overture Maps](https://overturemaps.org/) data into BigQuery tables using the [BigQuery Data Transfer Service](https://cloud.google.com/bigquery/docs/dts-introduction).
 You can clone this repo and run the terraform immediately; for more information on how it works, read below.
 
 ## Terraform instructions
