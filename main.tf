@@ -120,7 +120,7 @@ resource "google_bigquery_table" "building_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.building_stage`
     EOH
   }
@@ -138,7 +138,7 @@ resource "google_bigquery_table" "building_part_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.building_part_stage`
     EOH
   }
@@ -156,7 +156,7 @@ resource "google_bigquery_table" "connector_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.connector_stage`
     EOH
   }
@@ -174,7 +174,7 @@ resource "google_bigquery_table" "segment_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.segment_stage`
     EOH
   }
@@ -192,7 +192,7 @@ resource "google_bigquery_table" "place_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.place_stage`
     EOH
   }
@@ -210,7 +210,7 @@ resource "google_bigquery_table" "land_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.land_stage`
     EOH
   }
@@ -228,7 +228,7 @@ resource "google_bigquery_table" "land_use_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.land_use_stage`
     EOH
   }
@@ -246,7 +246,7 @@ resource "google_bigquery_table" "water_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.water_stage`
     EOH
   }
@@ -264,7 +264,7 @@ resource "google_bigquery_table" "infrastructure_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.infrastructure_stage`
     EOH
   }
@@ -282,7 +282,7 @@ resource "google_bigquery_table" "boundary_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.boundary_stage`
     EOH
   }
@@ -300,7 +300,7 @@ resource "google_bigquery_table" "division_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.division_stage`
     EOH
   }
@@ -318,7 +318,7 @@ resource "google_bigquery_table" "division_area_mv" {
     query = <<EOH
       select
         * except(geometry),
-        st_geogFromWKB(geometry) as geometry
+        st_geogFromWKB(geometry, make_valid => true) as geometry
       from `${var.project}.${var.dataset}.division_area_stage`
     EOH
   }
