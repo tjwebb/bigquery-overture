@@ -19,15 +19,6 @@ provider "google" {
 data "google_project" "project" {
 }
 
-/*
-resource "google_project_iam_member" "permissions" {
-  project = data.google_project.project.project_id
-  role   = "roles/iam.serviceAccountTokenCreator"
-  member = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
-}
-*/
-
-
 resource "google_bigquery_dataset" "overture_dataset" {
   dataset_id = var.dataset
   default_partition_expiration_ms = null
