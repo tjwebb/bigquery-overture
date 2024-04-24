@@ -8,7 +8,7 @@ variable "AWS_SECRET_ACCESS_KEY" {}
 
 terraform {
   backend "gcs" {
-    bucket = "bigquery-overture-tfstate"
+    bucket = var.bucket
   }
 }
 provider "google" {
@@ -19,11 +19,13 @@ provider "google" {
 data "google_project" "project" {
 }
 
+/*
 resource "google_project_iam_member" "permissions" {
   project = data.google_project.project.project_id
   role   = "roles/iam.serviceAccountTokenCreator"
   member = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
 }
+*/
 
 
 resource "google_bigquery_dataset" "overture_dataset" {
@@ -325,7 +327,7 @@ resource "google_bigquery_table" "division_area_mv" {
 }
 
 resource "google_bigquery_data_transfer_config" "building_transfer" {
-  depends_on = [google_bigquery_table.building_table, google_project_iam_member.permissions]
+  depends_on = [google_bigquery_table.building_table]
 
   display_name           = "Overture Maps: buildings->building"
   data_source_id         = "amazon_s3"
@@ -350,7 +352,7 @@ resource "time_sleep" "wait_1" {
 }
 
 resource "google_bigquery_data_transfer_config" "building_part_transfer" {
-  depends_on = [google_bigquery_table.building_part_table, google_project_iam_member.permissions, time_sleep.wait_1]
+  depends_on = [google_bigquery_table.building_part_table, time_sleep.wait_1]
 
   display_name           = "Overture Maps: buildings->building_part"
   data_source_id         = "amazon_s3"
@@ -376,7 +378,7 @@ resource "time_sleep" "wait_2" {
 }
 
 resource "google_bigquery_data_transfer_config" "connector_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_2]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_2]
 
   display_name           = "Overture Maps: transportation->connector"
   data_source_id         = "amazon_s3"
@@ -401,7 +403,7 @@ resource "time_sleep" "wait_3" {
 }
 
 resource "google_bigquery_data_transfer_config" "segment_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_3]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_3]
 
   display_name           = "Overture Maps: transportation->connector"
   data_source_id         = "amazon_s3"
@@ -426,7 +428,7 @@ resource "time_sleep" "wait_4" {
 }
 
 resource "google_bigquery_data_transfer_config" "place_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_4]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_4]
 
   display_name           = "Overture Maps: places->place"
   data_source_id         = "amazon_s3"
@@ -451,7 +453,7 @@ resource "time_sleep" "wait_5" {
 }
 
 resource "google_bigquery_data_transfer_config" "land_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_5]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_5]
 
   display_name           = "Overture Maps: base->land"
   data_source_id         = "amazon_s3"
@@ -476,7 +478,7 @@ resource "time_sleep" "wait_6" {
 }
 
 resource "google_bigquery_data_transfer_config" "land_use_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_6]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_6]
 
   display_name           = "Overture Maps: base->land_use"
   data_source_id         = "amazon_s3"
@@ -501,7 +503,7 @@ resource "time_sleep" "wait_7" {
 }
 
 resource "google_bigquery_data_transfer_config" "water_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_7]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_7]
 
   display_name           = "Overture Maps: base->water"
   data_source_id         = "amazon_s3"
@@ -526,7 +528,7 @@ resource "time_sleep" "wait_8" {
 }
 
 resource "google_bigquery_data_transfer_config" "infrastructure_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_8]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_8]
 
   display_name           = "Overture Maps: base->infrastructure"
   data_source_id         = "amazon_s3"
@@ -551,7 +553,7 @@ resource "time_sleep" "wait_9" {
 }
 
 resource "google_bigquery_data_transfer_config" "boundary_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_9]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_9]
 
   display_name           = "Overture Maps: divisions->boundary"
   data_source_id         = "amazon_s3"
@@ -576,7 +578,7 @@ resource "time_sleep" "wait_10" {
 }
 
 resource "google_bigquery_data_transfer_config" "division_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_10]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_10]
 
   display_name           = "Overture Maps: divisions->division"
   data_source_id         = "amazon_s3"
@@ -601,7 +603,7 @@ resource "time_sleep" "wait_11" {
 }
 
 resource "google_bigquery_data_transfer_config" "division_area_transfer" {
-  depends_on = [google_bigquery_table.connector_table, google_project_iam_member.permissions, time_sleep.wait_11]
+  depends_on = [google_bigquery_table.connector_table, time_sleep.wait_11]
 
   display_name           = "Overture Maps: divisions->division_area"
   data_source_id         = "amazon_s3"
